@@ -121,16 +121,17 @@ class FilterDataController extends Controller
         $data = [];
 
         foreach($base_data['data']['response']['billdetails'] as $bill_data) {
-            $denom = trim(explode(":", $bill_data['body'][0])[1]);
-            if(intval($denom) >= 100000) {
+            $denom = intval(trim(explode(":", $bill_data['body'][0])[1]));
+            if($denom >= 100000) {
                 $data[] = $denom;
             }
         }
 
-        return response()->json([
-            'status'    => 'success',
-            'message'   => 'List Data with denom >= 100000',
-            'data'      => $data
-        ], 200);
+        print_r($data);
+        // return response()->json([
+        //     'status'    => 'success',
+        //     'message'   => 'List Data with denom >= 100000',
+        //     'data'      => $data
+        // ], 200);
     }
 }

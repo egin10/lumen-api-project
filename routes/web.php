@@ -36,8 +36,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->group(['prefix' => 'firebase'], function() use ($router) {
         $router->get('/', ['as' => 'firebase.index', 'uses' => 'FirebaseController@index']);
         $router->get('{slug}', ['as' => 'firebase.show', 'uses' => 'FirebaseController@show']);
-        $router->post('create', ['as' => 'firebase.create', 'uses' => 'FirebaseController@store']);
-        $router->patch('{slug}', ['as' => 'firebase.update', 'uses' => 'FirebaseController@update']);
+        $router->post('create', ['as' => 'firebase.store', 'uses' => 'FirebaseController@store']);
+        $router->patch('update/{slug}', ['as' => 'firebase.update', 'uses' => 'FirebaseController@update']);
         $router->delete('{slug}', ['as' => 'firebase.delete', 'uses' => 'FirebaseController@delete']);
     });
 

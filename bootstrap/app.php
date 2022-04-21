@@ -26,6 +26,7 @@ $app = new Laravel\Lumen\Application(
 $app->withFacades();
 
 $app->withEloquent();
+$app->configure('swagger-lume');
 
 /*
 |--------------------------------------------------------------------------
@@ -78,6 +79,7 @@ $app->configure('app');
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
+    'docs' => App\Http\Middleware\SecureApiDocs::class,
 ]);
 
 /*
@@ -100,6 +102,11 @@ $app->register(App\Providers\EventServiceProvider::class);
 $app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
 $app->register(Chuckrincon\LumenConfigDiscover\DiscoverServiceProvider::class);
 $app->register(Kreait\Laravel\Firebase\ServiceProvider::class);
+$app->register(\SwaggerLume\ServiceProvider::class);
+
+$app->register('Sentry\Laravel\ServiceProvider');
+// To enable Sentry Performance Monitoring, the `TracingServiceProvider` has to be registered additionally:
+// $app->register('Sentry\Laravel\Tracing\ServiceProvider');
 
 /*
 |--------------------------------------------------------------------------
@@ -111,14 +118,6 @@ $app->register(Kreait\Laravel\Firebase\ServiceProvider::class);
 | can respond to, as well as the controllers that may handle them.
 |
 */
-
-$app->register('Sentry\Laravel\ServiceProvider');
-
-// To enable Sentry Performance Monitoring, the `TracingServiceProvider` has to be registered additionally:
-// $app->register('Sentry\Laravel\Tracing\ServiceProvider');
-
-// Sentry must be registered before routes are included
-// require __DIR__ . '/../app/Http/routes.php';
 
 $app->router->group([
     'namespace' => 'App\Http\Controllers',

@@ -19,6 +19,23 @@ class FirebaseController extends Controller
         $this->database = $database;
     }
 
+    /**
+     * @OA\Get(
+     *      path="/api/firebase",
+     *      operationId="showAllBooks",
+     *      tags={"Book"},
+     *      summary="Show all data book",
+     *      description="Returns all data Book",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not Found",
+     *      )
+     *     )
+     */
     public function index()
     {
         $data = $this->database->getReference('books')->getValue();
@@ -30,6 +47,32 @@ class FirebaseController extends Controller
         ], 200);
     }
 
+    /**
+     * @OA\Get(
+     *      path="/api/firebase/{slug}",
+     *      operationId="showBookBySlug",
+     *      tags={"Book"},
+     *      summary="Show a book",
+     *      description="Returns a Book",
+     *      @OA\Parameter(
+     *          parameter="slug",
+     *          name="slug",
+     *          @OA\Schema(
+     *             type="string"
+     *          ),
+     *          in="path",
+     *          required=true
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not Found",
+     *      )
+     *     )
+     */
     public function show($slug) {
         $data = $this->database->getReference('books/' . $slug)->getValue();
 
@@ -48,6 +91,43 @@ class FirebaseController extends Controller
         ], 200);
     }
 
+    /**
+     * @OA\Post(
+     *      path="/api/firebase",
+     *      operationId="createNewBook",
+     *      tags={"Book"},
+     *      summary="Create a book",
+     *      description="Returns message created",
+     *      @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 required={"title","author","qty"},
+     *                 @OA\Property(
+     *                     property="title",
+     *                     type="string",
+     *                 ),
+     *                 @OA\Property(
+     *                     property="author",
+     *                     type="string",
+     *                 ),
+     *                 @OA\Property(
+     *                     property="qty",
+     *                     type="integer",
+     *                 )
+     *             )
+     *         )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not Found",
+     *      )
+     *     )
+     */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -77,6 +157,52 @@ class FirebaseController extends Controller
         }
     }
 
+    /**
+     * @OA\Patch(
+     *      path="/api/firebase/update/{slug}",
+     *      operationId="updateBookById",
+     *      tags={"Book"},
+     *      summary="Update a book",
+     *      description="Returns message updated",
+     *      @OA\Parameter(
+     *          parameter="slug",
+     *          name="slug",
+     *          @OA\Schema(
+     *             type="string"
+     *          ),
+     *          in="path",
+     *          required=true
+     *      ),
+     *      @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 required={"title","author","qty"},
+     *                 @OA\Property(
+     *                     property="title",
+     *                     type="string",
+     *                 ),
+     *                 @OA\Property(
+     *                     property="author",
+     *                     type="string",
+     *                 ),
+     *                 @OA\Property(
+     *                     property="qty",
+     *                     type="integer",
+     *                 )
+     *             )
+     *         )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not Found",
+     *      )
+     *     )
+     */
     public function update(Request $request, $slug)
     {
         $this->validate($request, [
@@ -115,6 +241,32 @@ class FirebaseController extends Controller
         }
     }
 
+    /**
+     * @OA\Delete(
+     *      path="/api/firebase/{slug}",
+     *      operationId="deleteBySlug",
+     *      tags={"Book"},
+     *      summary="Delete a book",
+     *      description="Returns message delete",
+     *      @OA\Parameter(
+     *          parameter="slug",
+     *          name="slug",
+     *          @OA\Schema(
+     *             type="string"
+     *          ),
+     *          in="path",
+     *          required=true
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not Found",
+     *      )
+     *     )
+     */
     public function delete($slug)
     {
         $findData = $this->database->getReference('books/' . $slug)->getValue();

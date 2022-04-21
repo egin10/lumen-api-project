@@ -6,6 +6,17 @@ use Laravel\Lumen\Routing\Controller as BaseController;
 
 class Controller extends BaseController
 {
+    /**
+     * @OA\Info(
+     *   title="Lumen API Project",
+     *   version="1.0.0",
+     *   @OA\Contact(
+     *     email="egin066@gmail.com",
+     *     name="Ginanjar S.B"
+     *   )
+     * )
+     */
+
     public function respondWithToken($token)
     {
         return $this->responseApi("success", "Logout success", 

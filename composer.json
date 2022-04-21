@@ -7,9 +7,10 @@
     "require": {
         "php": "^8.0",
         "chuckrincon/lumen-config-discover": "^1.0",
+        "darkaonline/swagger-lume": "8.*",
         "kreait/firebase-php": "^6.2",
         "kreait/laravel-firebase": "^4.1",
-        "laravel/lumen-framework": "^9.0",
+        "laravel/lumen-framework": "^8.0",
         "sentry/sentry-laravel": "^2.12",
         "tymon/jwt-auth": "dev-develop"
     },
@@ -33,6 +34,9 @@
     "scripts": {
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-install-cmd": [
+            "cp -a vendor/swagger-api/swagger-ui/dist public/swagger-ui-assets"
         ]
     },
     "config": {

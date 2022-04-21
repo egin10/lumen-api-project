@@ -112,6 +112,14 @@ $app->register(Kreait\Laravel\Firebase\ServiceProvider::class);
 |
 */
 
+$app->register('Sentry\Laravel\ServiceProvider');
+
+// To enable Sentry Performance Monitoring, the `TracingServiceProvider` has to be registered additionally:
+// $app->register('Sentry\Laravel\Tracing\ServiceProvider');
+
+// Sentry must be registered before routes are included
+// require __DIR__ . '/../app/Http/routes.php';
+
 $app->router->group([
     'namespace' => 'App\Http\Controllers',
 ], function ($router) {

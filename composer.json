@@ -10,6 +10,7 @@
         "kreait/firebase-php": "^6.2",
         "kreait/laravel-firebase": "^4.1",
         "laravel/lumen-framework": "^9.0",
+        "sentry/sentry-laravel": "^2.12",
         "tymon/jwt-auth": "dev-develop"
     },
     "require-dev": {

@@ -29,7 +29,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->get('/', ['as' => 'mongo.index', 'uses' => 'MongoController@index']);
         $router->get('{slug}', ['as' => 'mongo.show', 'uses' => 'MongoController@show']);
         $router->post('create', ['as' => 'mongo.create', 'uses' => 'MongoController@store']);
-        $router->patch('{slug}', ['as' => 'mongo.update', 'uses' => 'MongoController@update']);
+        $router->patch('update/{slug}', ['as' => 'mongo.update', 'uses' => 'MongoController@update']);
         $router->delete('{slug}', ['as' => 'mongo.delete', 'uses' => 'MongoController@delete']);
     });
 

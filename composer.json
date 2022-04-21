@@ -8,6 +8,7 @@
         "php": "^8.0",
         "chuckrincon/lumen-config-discover": "^1.0",
         "darkaonline/swagger-lume": "8.*",
+        "guzzlehttp/guzzle": "^7.4",
         "kreait/firebase-php": "^6.2",
         "kreait/laravel-firebase": "^4.1",
         "laravel/lumen-framework": "^8.0",

@@ -45,5 +45,9 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->delete('{slug}', ['as' => 'firebase.delete', 'uses' => 'FirebaseController@delete']);
     });
 
+    // Reqres.in
+    $router->post('reqres/register', ['as' => 'reqres.register', 'uses' => 'ReqresController@register']);
+    $router->post('reqres/login', ['as' => 'reqres.login', 'uses' => 'ReqresController@login']);
+
     $router->get('filter-data', ['as' => 'filter-data', 'uses' => 'FilterDataController@filterData']);
 });

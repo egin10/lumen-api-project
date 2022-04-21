@@ -23,7 +23,7 @@ class FirebaseController extends Controller
      * @OA\Get(
      *      path="/api/firebase",
      *      operationId="showAllBooks",
-     *      tags={"Book"},
+     *      tags={"Books"},
      *      summary="Show all data book",
      *      description="Returns all data Book",
      *      @OA\Response(
@@ -51,7 +51,7 @@ class FirebaseController extends Controller
      * @OA\Get(
      *      path="/api/firebase/{slug}",
      *      operationId="showBookBySlug",
-     *      tags={"Book"},
+     *      tags={"Books"},
      *      summary="Show a book",
      *      description="Returns a Book",
      *      @OA\Parameter(
@@ -95,7 +95,7 @@ class FirebaseController extends Controller
      * @OA\Post(
      *      path="/api/firebase",
      *      operationId="createNewBook",
-     *      tags={"Book"},
+     *      tags={"Books"},
      *      summary="Create a book",
      *      description="Returns message created",
      *      @OA\RequestBody(
@@ -161,7 +161,7 @@ class FirebaseController extends Controller
      * @OA\Patch(
      *      path="/api/firebase/update/{slug}",
      *      operationId="updateBookById",
-     *      tags={"Book"},
+     *      tags={"Books"},
      *      summary="Update a book",
      *      description="Returns message updated",
      *      @OA\Parameter(
@@ -245,7 +245,7 @@ class FirebaseController extends Controller
      * @OA\Delete(
      *      path="/api/firebase/{slug}",
      *      operationId="deleteBySlug",
-     *      tags={"Book"},
+     *      tags={"Books"},
      *      summary="Delete a book",
      *      description="Returns message delete",
      *      @OA\Parameter(

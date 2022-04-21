@@ -22,6 +22,14 @@ class AuthController extends Controller
         ], 200);
     }
 
+    public function checkUser() {
+        return response()->json([
+            'status'    => 'success',
+            'message'   => 'Login',
+            'data'      => []
+        ], 200);
+    }
+
     public function logout() {
         return response()->json([
             'status'    => 'success',

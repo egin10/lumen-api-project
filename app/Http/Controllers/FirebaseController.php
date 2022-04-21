@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 class FirebaseController extends Controller
 {
     /**
@@ -22,7 +24,7 @@ class FirebaseController extends Controller
         ], 200);
     }
 
-    public function show($slug) {
+    public function show($id) {
         return response()->json([
             'status'    => 'success',
             'message'   => 'Show Data from Firebase',
@@ -30,7 +32,14 @@ class FirebaseController extends Controller
         ], 200);
     }
 
-    public function store($slug) {
+    public function store(Request $request, $id) {
+
+        $this->validate($request, [
+            'title' => 'required|string',
+            'author' => 'required|string',
+            'qty' => 'required|numeric',
+        ]);
+
         return response()->json([
             'status'    => 'success',
             'message'   => 'Store Data to Firebase',
@@ -38,7 +47,14 @@ class FirebaseController extends Controller
         ], 200);
     }
 
-    public function update($slug) {
+    public function update(Request $request, $id) {
+
+        $this->validate($request, [
+            'title' => 'required|string',
+            'author' => 'required|string',
+            'qty' => 'required|numeric',
+        ]);
+
         return response()->json([
             'status'    => 'success',
             'message'   => 'Update Data to Firebase',
@@ -46,7 +62,7 @@ class FirebaseController extends Controller
         ], 200);
     }
 
-    public function delete($slug) {
+    public function delete($id) {
         return response()->json([
             'status'    => 'success',
             'message'   => 'Delete Data from Firebase',

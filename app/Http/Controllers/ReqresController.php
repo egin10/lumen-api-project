@@ -19,6 +19,39 @@ class ReqresController extends Controller
         $this->uri = "https://reqres.in/api";
     }
 
+    /**
+     * @OA\Post(
+     *      path="/api/reqres/register",
+     *      operationId="registerToReqres",
+     *      tags={"Reqres"},
+     *      summary="Register to API Reqres",
+     *      description="Returns message from Reqres",
+     *      @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 required={"email","password"},
+     *                 @OA\Property(
+     *                     property="email",
+     *                     type="string",
+     *                 ),
+     *                 @OA\Property(
+     *                     property="password",
+     *                     type="string",
+     *                 )
+     *             )
+     *         )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not Found",
+     *      )
+     *     )
+     */
     public function register(Request $request)
     {
         $this->validate($request, [
@@ -43,6 +76,39 @@ class ReqresController extends Controller
         }
     }
 
+    /**
+     * @OA\Post(
+     *      path="/api/reqres/login",
+     *      operationId="loginToReqres",
+     *      tags={"Reqres"},
+     *      summary="Login to API Reqres",
+     *      description="Returns message from Reqres",
+     *      @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 required={"email","password"},
+     *                 @OA\Property(
+     *                     property="email",
+     *                     type="string",
+     *                 ),
+     *                 @OA\Property(
+     *                     property="password",
+     *                     type="string",
+     *                 )
+     *             )
+     *         )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not Found",
+     *      )
+     *     )
+     */
     public function login(Request $request)
     {
         $this->validate($request, [

@@ -19,10 +19,37 @@ class AuthController extends Controller
     }
 
     /**
-     * Store a new user.
-     *
-     * @param  Request  $request
-     * @return Response
+     * @OA\Post(
+     *      path="/api/register",
+     *      operationId="registerToProject",
+     *      tags={"Auth"},
+     *      summary="Register to API Project",
+     *      description="Returns message from Project",
+     *      @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 required={"email","password"},
+     *                 @OA\Property(
+     *                     property="email",
+     *                     type="string",
+     *                 ),
+     *                 @OA\Property(
+     *                     property="password",
+     *                     type="string",
+     *                 )
+     *             )
+     *         )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not Found",
+     *      )
+     *     )
      */
     public function register(Request $request)
     {
@@ -48,12 +75,39 @@ class AuthController extends Controller
         }
     }
 	
-     /**
-     * Get a JWT via given credentials.
-     *
-     * @param  Request  $request
-     * @return Response
-     */	 
+    /**
+     * @OA\Post(
+     *      path="/api/login",
+     *      operationId="loginToProject",
+     *      tags={"Auth"},
+     *      summary="Login to Project",
+     *      description="Returns message from Project",
+     *      @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 required={"email","password"},
+     *                 @OA\Property(
+     *                     property="email",
+     *                     type="string",
+     *                 ),
+     *                 @OA\Property(
+     *                     property="password",
+     *                     type="string",
+     *                 )
+     *             )
+     *         )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not Found",
+     *      )
+     *     )
+     */
     public function login(Request $request)
     {
           //validate incoming request 
@@ -70,17 +124,45 @@ class AuthController extends Controller
         return $this->respondWithToken($token);
     }
 	
-     /**
-     * Get user details.
-     *
-     * @param  Request  $request
-     * @return Response
-     */	 	
+    /**
+     * @OA\Get(
+     *      path="/api/user",
+     *      operationId="showDataUserHasAuth",
+     *      tags={"Auth"},
+     *      summary="Show data auth user",
+     *      description="Returns data auth user",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not Found",
+     *      )
+     *     )
+     */
     public function user()
     {
         return response()->json(auth()->user());
     }
 
+    /**
+     * @OA\Post(
+     *      path="/api/logout",
+     *      operationId="logout",
+     *      tags={"Auth"},
+     *      summary="Logout",
+     *      description="Returns message logout",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not Found",
+     *      )
+     *     )
+     */
     public function logout() {
         auth()->logout();
         return $this->responseApi("success", "Logout success", null, 200);

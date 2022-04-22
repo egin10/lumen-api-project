@@ -29,20 +29,20 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('user', ['as' => 'auth.user', 'uses' => 'AuthController@user']);
     $router->post('logout', ['as' => 'auth.logout', 'uses' => 'AuthController@logout']);
     
-    $router->group(['prefix' => 'mongo'], function() use ($router) {
-        $router->get('/', ['as' => 'mongo.index', 'uses' => 'MongoController@index']);
-        $router->get('{slug}', ['as' => 'mongo.show', 'uses' => 'MongoController@show']);
-        $router->post('create', ['as' => 'mongo.create', 'uses' => 'MongoController@store']);
-        $router->patch('update/{slug}', ['as' => 'mongo.update', 'uses' => 'MongoController@update']);
-        $router->delete('{slug}', ['as' => 'mongo.delete', 'uses' => 'MongoController@delete']);
+    $router->group(['prefix' => 'mongo-toys'], function() use ($router) {
+        $router->get('/', ['as' => 'mongo-toys.index', 'uses' => 'MongoController@index']);
+        $router->get('{slug}', ['as' => 'mongo-toys.show', 'uses' => 'MongoController@show']);
+        $router->post('/', ['as' => 'mongo-toys.create', 'uses' => 'MongoController@store']);
+        $router->patch('{slug}', ['as' => 'mongo-toys.update', 'uses' => 'MongoController@update']);
+        $router->delete('{slug}', ['as' => 'mongo-toys.delete', 'uses' => 'MongoController@delete']);
     });
 
-    $router->group(['prefix' => 'firebase'], function() use ($router) {
-        $router->get('/', ['as' => 'firebase.index', 'uses' => 'FirebaseController@index']);
-        $router->get('{slug}', ['as' => 'firebase.show', 'uses' => 'FirebaseController@show']);
-        $router->post('create', ['as' => 'firebase.store', 'uses' => 'FirebaseController@store']);
-        $router->patch('update/{slug}', ['as' => 'firebase.update', 'uses' => 'FirebaseController@update']);
-        $router->delete('{slug}', ['as' => 'firebase.delete', 'uses' => 'FirebaseController@delete']);
+    $router->group(['prefix' => 'firebase-books'], function() use ($router) {
+        $router->get('/', ['as' => 'firebase-books.index', 'uses' => 'FirebaseController@index']);
+        $router->get('{slug}', ['as' => 'firebase-books.show', 'uses' => 'FirebaseController@show']);
+        $router->post('/', ['as' => 'firebase-books.store', 'uses' => 'FirebaseController@store']);
+        $router->patch('{slug}', ['as' => 'firebase-books.update', 'uses' => 'FirebaseController@update']);
+        $router->delete('{slug}', ['as' => 'firebase-books.delete', 'uses' => 'FirebaseController@delete']);
     });
 
     // Reqres.in

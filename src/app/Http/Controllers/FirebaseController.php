@@ -21,7 +21,7 @@ class FirebaseController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/api/firebase",
+     *      path="/api/firebase-books",
      *      operationId="showAllBooks",
      *      tags={"Books"},
      *      summary="Show all data book",
@@ -40,16 +40,12 @@ class FirebaseController extends Controller
     {
         $data = $this->database->getReference('books')->getValue();
 
-        return response()->json([
-            'status'    => 'success',
-            'message'   => 'List Data from Firebase',
-            'data'      => $data
-        ], 200);
+        return $this->responseApi("success", "List of Books", $data, 200);
     }
 
     /**
      * @OA\Get(
-     *      path="/api/firebase/{slug}",
+     *      path="/api/firebase-books/{slug}",
      *      operationId="showBookBySlug",
      *      tags={"Books"},
      *      summary="Show a book",
@@ -76,24 +72,14 @@ class FirebaseController extends Controller
     public function show($slug) {
         $data = $this->database->getReference('books/' . $slug)->getValue();
 
-        if(!$data) {
-            return response()->json([
-                'status'    => 'error',
-                'message'   => 'Not Found',
-                'data'      => null
-            ], 404);
-        }
+        if(!$data) return $this->responseApi("error", "Book not found", null, 404);
         
-        return response()->json([
-            'status'    => 'success',
-            'message'   => 'Show Data from Firebase',
-            'data'      => $data
-        ], 200);
+        return $this->responseApi("success", "Data of Book", $data, 200);
     }
 
     /**
      * @OA\Post(
-     *      path="/api/firebase",
+     *      path="/api/firebase-books",
      *      operationId="createNewBook",
      *      tags={"Books"},
      *      summary="Create a book",
@@ -159,7 +145,7 @@ class FirebaseController extends Controller
 
     /**
      * @OA\Patch(
-     *      path="/api/firebase/update/{slug}",
+     *      path="/api/firebase-books/{slug}",
      *      operationId="updateBookById",
      *      tags={"Books"},
      *      summary="Update a book",
@@ -215,13 +201,7 @@ class FirebaseController extends Controller
         {
             $findData = $this->database->getReference('books/' . $slug)->getValue();
 
-            if(!$findData) {
-                return response()->json([
-                    'status'    => 'error',
-                    'message'   => 'Not Found',
-                    'data'      => null
-                ], 404);
-            }
+            if(!$findData) return $this->responseApi("error", "Book not found", null, 404);
 
             $data = $this->database
                             ->getReference('books/' . $slug)
@@ -232,7 +212,7 @@ class FirebaseController extends Controller
                             ]);
             $data = $data->getValue();
 
-            return $this->responseApi("success", "Book updated successful", $data, 201);
+            return $this->responseApi("success", "Book updated successful", $data, 200);
 
         } 
         catch (\Exception $e) 
@@ -243,8 +223,8 @@ class FirebaseController extends Controller
 
     /**
      * @OA\Delete(
-     *      path="/api/firebase/{slug}",
-     *      operationId="deleteBySlug",
+     *      path="/api/firebase-books/{slug}",
+     *      operationId="deleteBookBySlug",
      *      tags={"Books"},
      *      summary="Delete a book",
      *      description="Returns message delete",
@@ -269,22 +249,19 @@ class FirebaseController extends Controller
      */
     public function delete($slug)
     {
-        $findData = $this->database->getReference('books/' . $slug)->getValue();
+        try 
+        {   
+            $findData = $this->database->getReference('books/' . $slug)->getValue();
 
-        if(!$findData) {
-            return response()->json([
-                'status'    => 'error',
-                'message'   => 'Not Found',
-                'data'      => null
-            ], 404);
+            if(!$findData) return $this->responseApi("error", "Book not found", null, 404);
+
+            $this->database->getReference('books/' . $slug)->remove();
+
+            return $this->responseApi("success", "Book deleted", null, 200);
+        } 
+        catch (\Exception $e) 
+        {
+            return $this->responseApi("error", "Failed to updated data", null, 409);
         }
-
-        $this->database->getReference('books/' . $slug)->remove();
-
-        return response()->json([
-            'status'    => 'success',
-            'message'   => 'Delete Data from Firebase',
-            'data'      => null
-        ], 200);
     }
 }

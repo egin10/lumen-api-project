@@ -1,0 +1,45 @@
+version: '3'
+
+networks:
+  lumens:
+
+services:
+  php:
+    container_name: lumen-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./src:/code
+    networks:
+      - lumens
+  
+  mysql:
+    container_name: mysql
+    image: mysql:5.7.37
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./docker/mysql:/var/lib/mysql
+    networks:
+      - lumens
+    environment:
+      MYSQL_DATABASE: "lumen_api"
+      MYSQL_USER: "user"
+      MYSQL_PASSWORD: "password"
+      MYSQL_ROOT_PASSWORD: "password"
+      SERVICE_TAGS: "dev"
+      SERVICE_NAME: "mysql"
+
+  nginx:
+    container_name: nginx
+    image: nginx:1.21.4-alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./src:/code
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - lumens

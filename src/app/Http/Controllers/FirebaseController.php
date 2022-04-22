@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Kreait\Firebase\Contract\Database;
+use Kreait\Firebase\Database;
 
 class FirebaseController extends Controller
 {

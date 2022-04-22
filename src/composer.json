@@ -9,12 +9,12 @@
         "chuckrincon/lumen-config-discover": "^1.0",
         "darkaonline/swagger-lume": "8.*",
         "guzzlehttp/guzzle": "^7.4",
-        "kreait/firebase-php": "^5.19",
-        "kreait/laravel-firebase": "^3.4",
+        "kreait/firebase-php": "^5.11",
+        "kreait/laravel-firebase": "^3.0",
         "laravel/lumen-framework": "^8.0",
         "mongodb/mongodb": "^1.12",
         "sentry/sentry-laravel": "^2.12",
-        "tymon/jwt-auth": "dev-develop"
+        "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

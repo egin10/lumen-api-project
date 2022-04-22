@@ -47,6 +47,7 @@ WORKDIR /var/www/app
 # Install Redis
 RUN pecl install redis && docker-php-ext-enable redis.so
 
+RUN rm -rf /vendor && rm composer.lock
 RUN composer update
 
 EXPOSE 80 443

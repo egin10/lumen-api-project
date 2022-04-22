@@ -29,13 +29,17 @@ class AuthController extends Controller
      *         @OA\MediaType(
      *             mediaType="application/json",
      *             @OA\Schema(
-     *                 required={"email","password"},
+     *                 required={"username","password","password_confirmation"},
      *                 @OA\Property(
-     *                     property="email",
+     *                     property="username",
      *                     type="string",
      *                 ),
      *                 @OA\Property(
      *                     property="password",
+     *                     type="string",
+     *                 ),
+     *                 @OA\Property(
+     *                     property="password_confirmation",
      *                     type="string",
      *                 )
      *             )

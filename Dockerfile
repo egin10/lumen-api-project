@@ -11,7 +11,7 @@ RUN apt-get update -y \
 # Install PHP ext
 RUN docker-php-ext-install mbstring pdo pdo_mysql \
     && pecl install xdebug \
-    && docker-php-ext-enable xdebug
+    && docker-php-ext-enable xdebug pdo_mysql 
 
 RUN docker-php-ext-install opcache \
     && apt-get install libicu-dev -y \
@@ -36,8 +36,8 @@ RUN apt-get update && apt-get install -y git zip unzip \
     && docker-php-ext-install opcache \
     && pecl install mongodb apcu && docker-php-ext-enable mongodb apcu opcache
 
-COPY nginx-site.conf /etc/nginx/sites-enabled/default
-COPY run-app.sh /etc/run-app.sh
+COPY ./docker/nginx/nginx-site.conf /etc/nginx/sites-enabled/default
+COPY ./docker/run-app.sh /etc/run-app.sh
 RUN chmod +x /etc/run-app.sh
 
 COPY --chown=www-data:www-data ./src /var/www/app

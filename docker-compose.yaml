@@ -4,9 +4,9 @@ networks:
   lumens:
 
 services:
-  php:
+  app:
     container_name: lumen-app
-    image: lumen-app:1.0.0
+    image: lumen-app
     ports:
       - "8080:80"
     networks:

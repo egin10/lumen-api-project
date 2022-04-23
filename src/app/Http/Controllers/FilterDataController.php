@@ -16,6 +16,23 @@ class FilterDataController extends Controller
         //
     }
 
+    /**
+     * @OA\Get(
+     *      path="/api/filter-data",
+     *      operationId="showAllDataDenom",
+     *      tags={"Filter-Data-Denom"},
+     *      summary="Show all data denom >= 100000",
+     *      description="Returns all data denom >= 100000",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not Found",
+     *      )
+     *     )
+     */
     public function filterData()
     {
         $base_data = array (
